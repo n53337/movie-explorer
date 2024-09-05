@@ -1,6 +1,6 @@
 // ! I have to use any because i don't want to define all the properties of the movies
 
-export interface PopularMovie {
+export interface Movie {
   id: number;
   title: string;
   overview: string;
@@ -15,7 +15,7 @@ export interface MovieGenre {
   name: string;
 }
 
-export interface Movie {
+export interface MovieDetails {
   id: number;
   title: string;
   overview: string;
@@ -28,8 +28,8 @@ export interface Movie {
   [key: string]: any;
 }
 
-export interface PopularMoviesResponse {
-  results: PopularMovie[];
+export interface MoviesResponse {
+  results: Movie[];
   page: number;
   total_pages: number;
   total_results: number;
