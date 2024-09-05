@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Input } from "@/components/ui/input";
-import { useMovies } from "@/hooks/useMovieQueries";
 
 interface ExplorerSearchbarProps {
   query: string;

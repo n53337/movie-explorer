@@ -1,11 +1,11 @@
 import { moviesApi } from "@/lib/api";
-import { MoviesResponse } from "@/types/movie";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { MovieDetails, MoviesResponse } from "@/types/movie";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import debounce from "lodash.debounce";
 import { useCallback, useMemo, useState } from "react";
 
 export const useMovies = () => {
-  // ! Here I am managing the source of truth for the movies, it can be either popular or search
+  // ! Here I am managing the source of truth for the movies, it can be either popular or search based.
   // NOTE: I'm using the useInfiniteQuery hook, because it makes it easy to fetch data in a paginated way
 
   const [query, setQuery] = useState<string>("");
@@ -41,7 +41,6 @@ export const useMovies = () => {
       const response = await moviesApi.get<MoviesResponse>(apiEndpoint, {
         params: { page: pageParam },
       });
-      console.log(response.status);
 
       return response.data;
     },
@@ -62,5 +61,28 @@ export const useMovies = () => {
     isFetchingNextPage,
     query,
     onQueryChange,
+  };
+};
+
+export const useMovieDetails = () => {
+  const [movieId, setMovieId] = useState<number | null>(null);
+
+  const { data, isError, isLoading } = useQuery<MovieDetails>({
+    queryKey: ["movieDetails", movieId],
+    queryFn: async () => {
+      const response = await moviesApi.get<MovieDetails>(`movie/${movieId}`);
+      console.log(response.status);
+      return response.data;
+    },
+    enabled: !!movieId,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  return {
+    movieDetails: data,
+    isLoading,
+    isError,
+    movieId,
+    setMovieId,
   };
 };

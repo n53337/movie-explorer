@@ -24,7 +24,7 @@ export default function ExplorerMoviesWrapper() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-          console.log("INTERSECTED: Fetch Next Page");
+          // Here am making sure that i only fetch data when there no active fetching in the background
           fetchNextPage();
         }
       },
@@ -58,7 +58,7 @@ export default function ExplorerMoviesWrapper() {
 
         {/* rendering the movies */}
 
-        {movies.map((movie, index) => (
+        {movies.map((movie) => (
           <ExplorerMovieCard
             key={movie.id}
             movie={movie}
