@@ -1,11 +1,3 @@
-"use client";
-
-import { truncateText } from "@/lib/truncate";
-import Image from "next/image";
-import { Button } from "../ui/button";
-import { ChevronRight } from "lucide-react";
-import { useState } from "react";
-import ExplorerImageError from "./explorer-imageerror";
 import { Skeleton } from "../ui/skeleton";
 
 export default function ExplorerMovieSkeleton() {
@@ -15,9 +7,9 @@ export default function ExplorerMovieSkeleton() {
         <Skeleton className="h-full w-full rounded-b-none" />
       </div>
       <div className="flex flex-col p-4">
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="mt-2 h-12 w-full" />
-        <Skeleton className="mt-4 h-9 w-full" />
+        <Skeleton className="h-3 w-32" />
+        <Skeleton className="mt-2 h-10 w-full" />
+        <Skeleton className="mt-4 h-8 w-full" />
       </div>
     </>
   );
