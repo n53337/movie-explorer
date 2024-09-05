@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { APP_DESCRIPTION, APP_NAME } from "@/lib/constants";
+import Providers from "@/app/providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Movie Explorer",
-  description: "Explore movies with ease 🎬",
+  title: APP_NAME,
+  description: APP_DESCRIPTION,
 };
 
 export default function RootLayout({
@@ -26,9 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

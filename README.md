@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Movie Explorer App 🎬
+
+This is a movie explorer app built with Next.js, Tailwind CSS, Shadcn UI, and TypeScript, TanStack Query, V5 and Axios.
+
+![](/sc1.jpeg)
+![](/sc2.jpeg)
+
+# Table of Contents
+
+## [Features](#features)
+
+## [Getting Started](#getting-started)
+
+## [Problem Overview](#problem-overview)
+
+## [Solution Design](#solution-design)
+
+## Features
+
+- Responsive layout for mobile and desktop.
+- Browse popular movies.
+- Search for movies by title.
+- View movie details in a modal with beautiful design.
 
 ## Getting Started
 
-First, run the development server:
+To get started, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/n53337/movie-explorer.git
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+// or
+yarn install
+```
+
+3. Rename the `.env.example` file to `.env.local` and add your API token:
+
+```bash
+cp .env.example .env.local
+```
+
+4. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open the [App](http://localhost:3000) in your browser to view the app. and Voila! 🎉
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Problem Overview
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The task was to build a movie explorer app that interacts with the TMDb API, retrieves movie data, and offers a smooth user experience with:
 
-## Learn More
+    •	Data Fetching using Axios
+    •	Caching and Pagination via TanStack Query V5
+    •	Modal windows for detailed views
+    •	A search feature to explore specific movies.
 
-To learn more about Next.js, take a look at the following resources:
+## Solution Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![solution design](/solution-design.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Data Fetching and Caching
 
-## Deploy on Vercel
+I used TanStack Query V5 for its powerful caching capabilities. It reduces unnecessary API calls by caching previously fetched data. I also use custom hooks to make it easier to deal with the data fetching process.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Pagination
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+I've implemented pagination using the `useInfiniteQuery` hook from TanStack Query V5. This hook allows you to fetch data in a paginated way. and i use the `Intersection Observer API` to trigger the loading of the next page when the user scrolls to the bottom of the current page.
+
+### Debouncing
+
+I also Debouncing technique to avoid "request spamming", so the user can only make a request every 500ms.
+
+## Built with ❤️ .
