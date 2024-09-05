@@ -23,7 +23,6 @@ export default function ExplorerMovieDetails({
   onClose,
   movie,
   isLoading,
-  isError,
 }: ExplorerMovieDetailsProps) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
