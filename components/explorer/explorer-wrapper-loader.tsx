@@ -22,3 +22,14 @@ export function ExplorerLoaderError() {
     </div>
   );
 }
+
+export function ExplorerNotFound({ query }: { query: string }) {
+  return (
+    <div className="flex flex-col justify-center items-center h-[512px] w-[288px]">
+      <Frown className="text-muted-foreground h-16 w-16 " />
+      <p className="text-sm text-muted-foreground mt-4 text-center">
+        No movies found for <span className="text-foreground">{query}</span>
+      </p>
+    </div>
+  );
+}

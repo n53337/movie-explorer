@@ -3,7 +3,11 @@ import React, { useEffect, useRef } from "react";
 import ExplorerMovieCard from "@/components/explorer/explorer-movie-card";
 import { useMovies } from "@/hooks/useMovieQueries";
 import { InfinitySpin } from "react-loader-spinner";
-import { ExplorerLoader, ExplorerLoaderError } from "./explorer-wrapper-loader";
+import {
+  ExplorerLoader,
+  ExplorerLoaderError,
+  ExplorerNotFound,
+} from "./explorer-wrapper-loader";
 import ExplorerSearchbar from "./explorer-searchbar";
 
 export default function ExplorerMoviesWrapper() {
@@ -54,7 +58,7 @@ export default function ExplorerMoviesWrapper() {
       <div className="flex flex-wrap gap-4 justify-center mt-6">
         {/* initial loading  */}
 
-        {!movies.length && !isError && <ExplorerLoader />}
+        {!movies.length && !isError && <ExplorerNotFound query={query} />}
 
         {/* rendering the movies */}
 
