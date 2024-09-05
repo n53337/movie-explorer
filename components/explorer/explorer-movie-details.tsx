@@ -6,7 +6,7 @@ import { Dialog, DialogContent } from "../ui/dialog";
 import { Badge } from "../ui/badge";
 import { getMovieDuration } from "@/lib/get-movie-duration";
 import { useState } from "react";
-import ExplorerMovieDetailsSkeleton from "./explorer-moviedetails-skeleton";
+import ExplorerMovieDetailsSkeleton from "./explorer-movie-details-skeleton";
 import Link from "next/link";
 
 interface ExplorerMovieDetailsProps {

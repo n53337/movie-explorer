@@ -4,18 +4,21 @@ import { truncateText } from "@/lib/truncate";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import { ChevronRight } from "lucide-react";
-import { useState } from "react";
-import ExplorerImageError from "./explorer-imageerror";
-import ExplorerMovieSkeleton from "./explorer-movieskeleton";
+import { RefAttributes, useState } from "react";
+import ExplorerImageError from "./explorer-image-error";
+import ExplorerMovieSkeleton from "./explorer-movie-skeleton";
 import { Badge } from "../ui/badge";
-import ExplorerMovieDetails from "./explorer-moviedetails";
+import ExplorerMovieDetails from "./explorer-movie-details";
+import { PopularMovie } from "@/types/movie";
+import { BASE_IMAGE_URL } from "@/lib/constants";
 
 interface ExplorerMovieCardProps {
-  //   movie: Movie;
   isLoading: boolean;
+  movie?: PopularMovie;
 }
 
 export default function ExplorerMovieCard({
+  movie,
   isLoading,
 }: ExplorerMovieCardProps) {
   const [isImageLoaded, setIsImageLoaded] = useState(true);
@@ -24,17 +27,17 @@ export default function ExplorerMovieCard({
   return (
     <>
       <div className="flex flex-col border border-border rounded-lg shadow-sm w-72">
-        {isLoading ? (
+        {isLoading && !movie ? (
           <ExplorerMovieSkeleton />
         ) : (
           <>
-            <div className="border-b border-border">
+            <div className="border-b border-border min-h-[430px]">
               {isImageLoaded ? (
                 <Image
-                  src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpicfiles.alphacoders.com%2F198%2F198975.jpg&f=1&nofb=1&ipt=1ac9336e602534c5d3891f48e18cbc6afe9e2134c6c7b255fb5a879bdaa17a48&ipo=images"
+                  src={`${BASE_IMAGE_URL}/${movie?.poster_path}`}
                   alt="Movie poster"
-                  width={320}
-                  height={450}
+                  width={360}
+                  height={500}
                   className="rounded-t-lg transition duration-500"
                   loading="lazy"
                   onError={() => setIsImageLoaded(false)}
@@ -48,15 +51,11 @@ export default function ExplorerMovieCard({
             <div className="flex flex-col p-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-muted-foreground uppercase">
-                  {new Date("2024-07-24").toDateString()}
+                  {new Date(movie?.release_date || "").toDateString()}
                 </span>
-                <Badge variant="secondary">4.5 / 5</Badge>
+                <Badge variant="secondary">{movie?.vote_average}</Badge>
               </div>
-              <p className="mt-2">
-                {truncateText(
-                  "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam maiores eveniet est quibusdam quasi voluptatum ab velit beatae dolorum. Illo delectus sit assumenda sequi inventore distinctio reprehenderit odio cumque saepe."
-                )}
-              </p>
+              <p className="mt-2">{truncateText(movie?.overview || "")}</p>
               <Button className="mt-4" onClick={() => setIsDetailsOpen(true)}>
                 Details
                 <ChevronRight className="ml-2 h-4 w-4" />

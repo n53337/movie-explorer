@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "external-content.duckduckgo.com",
+        hostname: "image.tmdb.org",
       },
     ],
   },
