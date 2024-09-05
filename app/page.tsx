@@ -1,5 +1,4 @@
 import ExplorerMoviesWrapper from "@/components/explorer/explorer-movies-wrapper";
-import ExplorerSearchbar from "@/components/explorer/explorer-searchbar";
 import BrandLogo from "@/components/shared/brand-logo";
 import ThemeToggle from "@/components/shared/theme-toggle";
 
@@ -11,10 +10,6 @@ export default function Home() {
           <BrandLogo />
           <ThemeToggle />
         </header>
-
-        <div className="mt-6 max-w-lg mx-auto">
-          <ExplorerSearchbar />
-        </div>
       </section>
 
       <section className="p-6 lg:p-8">

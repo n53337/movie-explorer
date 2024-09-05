@@ -4,6 +4,7 @@ import ExplorerMovieCard from "@/components/explorer/explorer-movie-card";
 import { useMovies } from "@/hooks/useMovieQueries";
 import { InfinitySpin } from "react-loader-spinner";
 import { ExplorerLoader, ExplorerLoaderError } from "./explorer-wrapper-loader";
+import ExplorerSearchbar from "./explorer-searchbar";
 
 export default function ExplorerMoviesWrapper() {
   const {
@@ -13,6 +14,8 @@ export default function ExplorerMoviesWrapper() {
     isFetchingNextPage,
     isLoading,
     isError,
+    query,
+    onQueryChange,
   } = useMovies();
 
   const observerTarget = useRef<HTMLDivElement>(null);
@@ -41,34 +44,46 @@ export default function ExplorerMoviesWrapper() {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center">
-      {/* initial loading  */}
+    <div className="flex flex-col">
+      <div className="sticky top-20 z-10 bg-background/85 w-full backdrop-blur-md pb-6 rounded-b-lg">
+        <div className="max-w-lg mx-auto">
+          <ExplorerSearchbar query={query} onSearch={onQueryChange} />
+        </div>
+      </div>
 
-      {!movies.length && !isError && <ExplorerLoader />}
+      <div className="flex flex-wrap gap-4 justify-center mt-6">
+        {/* initial loading  */}
 
-      {/* rendering the movies */}
+        {!movies.length && !isError && <ExplorerLoader />}
 
-      {movies.map((movie, index) => (
-        <ExplorerMovieCard key={movie.id} movie={movie} isLoading={isLoading} />
-      ))}
+        {/* rendering the movies */}
 
-      {/* This is using the intersection observer to trigger the loading spinner, and i set it to the spinner */}
+        {movies.map((movie, index) => (
+          <ExplorerMovieCard
+            key={movie.id}
+            movie={movie}
+            isLoading={isLoading}
+          />
+        ))}
 
-      {/* NOTE: I saw this loading technique in Youtube, so this is 3 dummy loading cards and a spinner */}
+        {/* This is using the intersection observer to trigger the loading spinner, and i set it to the spinner */}
 
-      {hasNextPage && (
-        <>
-          <ExplorerLoader numberOfCards={3} />
-          <div
-            className="flex justify-center items-center w-full py-6"
-            ref={observerTarget}
-          >
-            <InfinitySpin color="#7936EC" />
-          </div>
-        </>
-      )}
+        {/* NOTE: I saw this loading technique in Youtube, so this is 3 dummy loading cards and a spinner */}
 
-      {isError && <ExplorerLoaderError />}
+        {hasNextPage && (
+          <>
+            <ExplorerLoader numberOfCards={3} />
+            <div
+              className="flex justify-center items-center w-full py-6"
+              ref={observerTarget}
+            >
+              <InfinitySpin color="#7936EC" />
+            </div>
+          </>
+        )}
+
+        {isError && <ExplorerLoaderError />}
+      </div>
     </div>
   );
 }

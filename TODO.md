@@ -3,3 +3,4 @@
 [] Metadata for pages and images for meta tags
 [] Optimize image loading
 [] Fix the UI elements
+[] Add Github Link in the lef side
