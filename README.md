@@ -79,4 +79,8 @@ I've implemented pagination using the `useInfiniteQuery` hook from TanStack Quer
 
 I also Debouncing technique to avoid "request spamming", so the user can only make a request every 500ms.
 
+### Performance
+
+I considered performance as a crucial aspect of the app, because it has so many assets (Images) to load, which can slow down the loading time. Espically for low network speeds. So I used the `next/image` component to optimize the image sizes. and the `lazy loading` technique, so that you only fetch images when they are needed.
+
 ## Built with ❤️ .
