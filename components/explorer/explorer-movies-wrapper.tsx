@@ -58,7 +58,11 @@ export default function ExplorerMoviesWrapper() {
       <div className="flex flex-wrap gap-4 justify-center mt-6">
         {/* initial loading  */}
 
-        {!movies.length && !isError && <ExplorerNotFound query={query} />}
+        {isLoading && <ExplorerLoader />}
+
+        {!movies.length && !isError && query && !isLoading && (
+          <ExplorerNotFound query={query} />
+        )}
 
         {/* rendering the movies */}
 
